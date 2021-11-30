@@ -10,9 +10,9 @@ The recommended way to install Assembly4 is through FreeCAD's [Addon Manager](ht
 
 [![FreeCAD Addon manager status](https://img.shields.io/badge/FreeCAD%20addon%20manager-available-brightgreen)](https://github.com/FreeCAD/FreeCAD-addons)
 
-**Important Note:** Assembly 4 is **not** compatible with FreeCAD v0.18, and needs FreeCAD >= `v0.19.18353`
+**Important Note:** Assembly4 is **not** compatible with FreeCAD v0.18, and needs FreeCAD >= `v0.19.18353`
 
-**Important Note:** Assembly 4 is **not** compatible with Assembly2+ and Assembly3.
+**Important Note:** Assembly4 is **not** compatible with Assembly2+ and Assembly3.
 
 
 
@@ -128,7 +128,7 @@ Commands are activated with relevant selection. If a command is inactive (grayed
 
 Some general purpose 3D CAD systems propose a workflow based on finished parts that are assembled into an assembly, and their position in that assembly is determined by constraints imposed on geometrical features present in the parts: holes, edges, faces... While this is quite easy to understand for beginners, it poses some limits on advanced users who need to modify the parts that are already inserted into an assembly. For example, if a part is placed using some geometrical feature, and that feature is later modified during the design process, the assembly solver might not be able to find the original constraint because the geometrical feature on which it was based has disappeared, and will throw an error. This can be a very difficult problem to solve, and is due to the dreaded *topological naming* issue. 
 
-Therefore, this is not the workflow used in Assembly 4, and instead Assembly 4 uses the principle of a **master sketch** : at the root of the assembly, *i.e.* in the Assembly 4 *Model*, one — or more — sketches are drawn that represent the "skeleton" of the assembly. This skeleton matches the functionalities of the assembly, and holds elements such as points and lines at characteristical positions of the assembly: rotational axes, fixation points, translation axes, beam directions... Furthermore, local coordinate systems — technically these are `PartDesign::CoordinateSystem` type objects and are called **LCS** in Assembly 4 — are placed on these characteristical points. The same principle — local coordinate systems at characteristical locations — is also applied in the design process of parts. Thus, the local coordinate systems in the parts can be matched to local coordinate systems in the assembly, guaranteeing that the part is positioned in the assembly at its intended position.
+Therefore, this is not the workflow used in Assembly4, and instead Assembly4 uses the principle of a **master sketch** : at the root of the assembly, *i.e.* in the Assembly4 *Model*, one — or more — sketches are drawn that represent the "skeleton" of the assembly. This skeleton matches the functionalities of the assembly, and holds elements such as points and lines at characteristical positions of the assembly: rotational axes, fixation points, translation axes, beam directions... Furthermore, local coordinate systems — technically these are `PartDesign::CoordinateSystem` type objects and are called **LCS** in Assembly4 — are placed on these characteristical points. The same principle — local coordinate systems at characteristical locations — is also applied in the design process of parts. Thus, the local coordinate systems in the parts can be matched to local coordinate systems in the assembly, guaranteeing that the part is positioned in the assembly at its intended position.
 
 
 
@@ -161,7 +161,7 @@ The previous method allows to assemble parts within a single level.
 But this workbench also allows the assembly of assemblies: since there is no difference between 
 parts and assemblies, the 'Insert External Part' allows to chose a part that has other parts linked to it. 
 The only difference will be for the coordinate systems in the inserted assemblies: in order to be used 
-with Assembly 4, a coordinate system must be directly in the root 'Model' container, meaning that a 
+with Assembly4, a coordinate system must be directly in the root 'Model' container, meaning that a 
 coordinate system inside a linked part cannot be used to attach the assembly to a higher-level assembly.
 
 Therefore, in order to re-use a coordinate system of a part in an assembly, a coordinate system must be created at the root of the 'Model', and the placement of this coordinate system must be 'copied' over from the coordinate system that the user wants to use. This is done by inserting a coordinate system and using the 'Place LCS' command, which allows to select a linked part in the assembly and one of it's coordinate systems: the 2 coordinate systems — the one at the root of 'Model' and the one in the linked part — will always be superimposed, even if the linked part is modified, allowing the placement of the assembly in a higher level assembly using a linked part as reference. It sounds more complicated than it actually is.
